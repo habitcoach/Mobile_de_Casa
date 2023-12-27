@@ -1,0 +1,78 @@
+﻿@model Mobile_de_Casa.Models.SubCategory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SubCategory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<div class="col-3">
+    <p>Existing SubCategories</p>
+    <div id="SubCategoryList">
+        <ul class="list-group"></ul>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function getSubcategoryList() {
+            var categorySelected = $("#CategoryId").val();
+            $list = $("#SubCategoryList");
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7109/api/Employee",
+                dataType: "text",
+                success: function(data) {
+                    results = JSON.parse(data);
+                    console.log('Success=' + data);
+                    $list.html('');
+                    $list.append('<ul class="list-group">');
+                    for (i in results) {
+                        $list.append('<li class="list-group-item">' + results[i].text + '</li>');
+                    }
+                    $list.append('</ul>');
+                },
+                error: function(req, status, error) {
+                    console.log(msg);
+                }
+            });
+        }
+        $(document).ready(function() {
+            getSubcategoryList();
+        });
+        $("#CategoryId").change(function() {
+            getSubcategoryList();
+        });
+    </script>
+
+
+}

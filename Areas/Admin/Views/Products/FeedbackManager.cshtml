@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Mobile_de_Casa.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedbackDate)
+            </th>
+            
+           
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td> <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td> <td>
+                @Html.DisplayFor(modelItem => item.FeedbackDate)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

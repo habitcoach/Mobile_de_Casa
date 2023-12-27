@@ -1,0 +1,143 @@
+﻿@model IEnumerable<Mobile_de_Casa.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="post">
+<div   text-aligns="input-group backgroundWhite">
+     <input  type="search" class="btn-1" aria-pressed="true" placeholder="Product name" aria-label="Search"  aria-describedby="search-addon" name="SearchString" value="@ViewBag.StrSearch">
+     <button type="submit" class="btn-2" value="Search"> <i class="fa fa-search"></i></button>  </br> </br> 
+     
+</div>
+  
+</form>
+<div class="Filter"> 
+@using (Html.BeginForm(actionName:"Filter", controllerName:"Products", FormMethod.Post))
+        {
+            <div class="filter">
+                <h5><i class="fa fa-list"></i> Filter</h5>
+                <ul>
+                    <li>
+                            @Html.RadioButton("FilterR","Price") Price  
+                            @Html.RadioButton("FilterR","BestSeller") Best seller &nbsp;
+                            <input type="submit" value="submit" class="btn-2"/>
+
+                           @* <input type="submit" value="Submit" class="btn-2" />*@
+                    </li>
+                </ul>
+                 
+            </div>            
+        }
+        </div>
+<table class="table">
+    <thead>
+        <tr>
+
+             <th>
+                @Html.DisplayNameFor(model => model.Image)
+               
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategory)
+            </th>
+            <th>
+                @Html.DisplayName("Action")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+                <img src="@item.Image" width="150" height="75">
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategory.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<style>
+    .btn-1{
+    width: 500px;
+    height:40px;
+    border:solid;
+    border-color:darkslategray;
+    color: black
+    background-color:transparent;
+    border-radius: 4px;
+    box-shadow:none;
+    font-size: 1rem;
+    text-align:center;
+    outline:green;
+    margin-left:480px;
+    }
+    .btn-2{
+    width: 100px;
+    height:40px;
+    border:solid;
+    border-color:darkslategray;
+    color: black;
+    background-color:transparent;
+    border-radius: 4px;
+    box-shadow:none;
+    font-size: 1rem;
+    outline:green;
+    }
+    .Filter{
+            margin-left:600px;
+           
+            color: black;
+            font-family:'Times New Roman', Times, serif;
+            font-size:20px;
+
+
+    }
+    
+   
+
+</style>
+
