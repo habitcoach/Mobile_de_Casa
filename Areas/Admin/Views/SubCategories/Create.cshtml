@@ -49,7 +49,7 @@
             $list = $("#SubCategoryList");
             $.ajax({
                 type: "GET",
-                url: "https://localhost:7109/api/Employee",
+                url: "https://localhost:7109/Admin/SubCategories/GetSubCategory/" + categorySelected,
                 dataType: "text",
                 success: function(data) {
                     results = JSON.parse(data);
